@@ -1,0 +1,49 @@
+---
+title: "SophieDevan Project"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(skimr)
+```
+
+```{r}
+brush_raw <- 
+  readr::read_csv("/Users/sophieborison/Desktop/Data_for_Sophie.csv", skip=3, na=c("NA", "N/A", "#N/A"))
+```
+
+```{r}
+names(brush_raw)
+```
+
+```{r}
+glimpse(brush_raw)
+```
+
+```{r}
+brush_rename <- 
+  rename()
+```
+
+```{r}
+brush %>%
+  mutate(
+     "GPS Location" = "Latitude",
+               "X8" = "Longitude",
+  )
+```
+
+```{r}
+brush_rename %>%
+  purrr::map_df(~ sum(is.na(.))) %>%
+  tidyr::gather(variables, num_nas) %>% 
+  arrange(desc(num_nas))
+```
+
+
+
