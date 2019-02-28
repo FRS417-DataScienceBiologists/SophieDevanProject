@@ -255,4 +255,41 @@ parks_renamed %>%
   geom_boxplot()
 ```
 
+# I want to look at Joshua Tree in particular
 
+```{r}
+parks_renamed %>%
+  select(park_name, year, rec_visits) %>%
+  filter(park_name=="Joshua Tree NP") %>%
+  group_by(year) %>%
+  summarize(mean_rec_visits=mean(rec_visits))%>%
+  ggplot(aes(x=year, y=mean_rec_visits)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Visits to Joshua Tree NP Overtime",
+       x = "Year",
+       y = "Mean Rec Visits") +
+  theme(plot.title=element_text(size=16, face="bold", hjust=0.5),
+        axis.text = element_text(size=10),
+        axis.title = element_text(size=12))
+```
+
+
+# What about Glacier National Park?
+
+```{r}
+parks_renamed %>%
+  select(park_name, year, rec_visits) %>%
+  filter(park_name=="Glacier NP") %>%
+  group_by(year) %>%
+  summarize(mean_rec_visits=mean(rec_visits))%>%
+  ggplot(aes(x=year, y=mean_rec_visits)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Visits to Glacier NP Overtime",
+       x = "Year",
+       y = "Mean Rec Visits") +
+  theme(plot.title=element_text(size=16, face="bold", hjust=0.5),
+        axis.text = element_text(size=10),
+        axis.title = element_text(size=12))
+```
