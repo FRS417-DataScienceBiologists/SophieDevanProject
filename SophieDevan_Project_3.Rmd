@@ -26,6 +26,13 @@ glimpse(parks)
 ```
 
 ```{r}
+parks %>%
+  purrr::map_df(~ sum(is.na(.))) %>%
+  tidyr::gather(variables, num_nas) %>% 
+  arrange(desc(num_nas))
+```
+
+```{r}
 parks_renamed <- parks %>%
   dplyr::rename(
             park_name = ParkName,
@@ -64,6 +71,188 @@ non_rec_overnight_stays = NonRecreationOvernightStays,
       non_rec_overnight = NonRecreationOvernightStaysTotal,
 misc_overnight_stays_total = MiscellaneousOvernightStaysTotal
           )
+```
+
+# want to summarize number of rec visits per park per year
+
+### I dont want total number of entries, but total of rows for that park
+```{r}
+parks_renamed %>%
+  group_by(park_name) %>%
+  summarize(total = n())
+```
+
+### GGNRA in 1987 had the highest rec_visits 
+### NRAs seem to be the most popular park type, at least recreationally
+```{r}
+parks_renamed %>%
+  group_by(year, park_name) %>%
+   summarize(mean_rec_visits = mean(rec_visits), 
+              min_rec_visits = min(rec_visits),
+              max_rec_visits = max(rec_visits),
+              total = n()) %>%
+  arrange(desc(mean_rec_visits)) %>%
+  ggplot(aes(x=reorder(park_name, mean_rec_visits), y=mean_rec_visits, group=year, fill=year)) +
+  geom_bar(stat="identity") + #width = 0.8, position = position_dodge(width = 0.9))
+  labs(title = "Rec Visits Per Park Per Year",
+       x = "Park",
+       y = "Rec Visits") +
+  theme(legend.position = "none", axis.text.x = element_text(angle = 65, hjust = 1),
+       plot.title=element_text(size=16, face="bold", hjust=0.5),
+       axis.text = element_text(size=2),
+        axis.title = element_text(size=12))
+```
+
+### rec visits per year
+### rec visits have been slowly going up going up over time
+### peaked in late 80s then again in 2010 and onwards
+```{r}
+parks_renamed %>%
+  group_by(year) %>%
+   summarize(mean_rec_visits = mean(rec_visits), 
+              min_rec_visits = min(rec_visits),
+              max_rec_visits = max(rec_visits),
+              total = n()) %>%
+  arrange(desc(mean_rec_visits)) %>%
+  ggplot(aes(x=year, y=mean_rec_visits)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Rec Visits Per Year",
+       x = "Year",
+       y = "Mean Rec Visits") +
+  theme(axis.text.x = element_text(angle = 65, hjust = 1),
+       plot.title=element_text(size=16, face="bold", hjust=0.5),
+        axis.text = element_text(size=10),
+        axis.title = element_text(size=12))
+```
+
+# want to look at what park type is most popular
+
+```{r}
+parks_renamed %>%
+  group_by(park_type) %>%
+   summarize(mean_rec_visits = mean(rec_visits), 
+              min_rec_visits = min(rec_visits),
+              max_rec_visits = max(rec_visits),
+              total = n()) %>%
+  arrange(desc(mean_rec_visits)) %>%
+  ggplot(aes(x= reorder(park_type,mean_rec_visits), y=mean_rec_visits)) +
+  geom_bar(stat="identity") +
+  labs(title = "Popularity of Park Type",
+       x = "Park Type",
+       y = "Mean Rec Visits") +
+  theme(axis.text.x = element_text(angle = 65, hjust = 1),
+       plot.title=element_text(size=16, face="bold", hjust=0.5),
+        axis.text = element_text(size=10),
+        axis.title = element_text(size=12))
+```
+
+# want to look at popularity of biomes overtime
+
+```{r}
+parks_renamed %>%
+  group_by(region) %>%
+   summarize(mean_rec_visits = mean(rec_visits), 
+              min_rec_visits = min(rec_visits),
+              max_rec_visits = max(rec_visits),
+              total = n()) %>%
+  arrange(desc(mean_rec_visits))
+```
+
+```{r}
+p1 <- parks_renamed %>%
+  select(region, year, rec_visits) %>%
+  filter(region=="Northeast") %>%
+  group_by(year) %>%
+  summarize(mean_rec_visits = mean(rec_visits)) %>%
+  ggplot(aes(x=year, y=mean_rec_visits)) +
+  geom_point() +
+  geom_line()
+```
+
+```{r}
+p2 <- parks_renamed %>%
+  select(region, year, rec_visits) %>%
+  filter(region=="Pacific West") %>%
+  group_by(year) %>%
+  summarize(mean_rec_visits = mean(rec_visits)) %>%
+  ggplot(aes(x=year, y=mean_rec_visits)) +
+  geom_point() +
+  geom_line()
+```
+
+```{r}
+p3 <- parks_renamed %>%
+  select(region, year, rec_visits) %>%
+  filter(region=="Southeast") %>%
+  group_by(year) %>%
+  summarize(mean_rec_visits = mean(rec_visits)) %>%
+  ggplot(aes(x=year, y=mean_rec_visits)) +
+  geom_point() +
+  geom_line()
+```
+
+```{r}
+p4 <- parks_renamed %>%
+  select(region, year, rec_visits) %>%
+  filter(region=="Midwest") %>%
+  group_by(year) %>%
+  summarize(mean_rec_visits = mean(rec_visits)) %>%
+  ggplot(aes(x=year, y=mean_rec_visits)) +
+  geom_point() +
+  geom_line()
+```
+
+```{r}
+p5 <- parks_renamed %>%
+  select(region, year, rec_visits) %>%
+  filter(region=="Intermountain") %>%
+  group_by(year) %>%
+  summarize(mean_rec_visits = mean(rec_visits)) %>%
+  ggplot(aes(x=year, y=mean_rec_visits)) +
+  geom_point() +
+  geom_line()
+```
+
+```{r}
+p6 <- parks_renamed %>%
+  select(region, year, rec_visits) %>%
+  filter(region=="Alaska") %>%
+  group_by(year) %>%
+  summarize(mean_rec_visits = mean(rec_visits)) %>%
+  ggplot(aes(x=year, y=mean_rec_visits)) +
+  geom_point() +
+  geom_line()
+```
+
+```{r}
+p7 <- parks_renamed %>%
+  select(region, year, rec_visits) %>%
+  filter(region=="National Capital") %>%
+  group_by(year) %>%
+  summarize(mean_rec_visits = mean(rec_visits)) %>%
+  ggplot(aes(x=year, y=mean_rec_visits)) +
+  geom_point() +
+  geom_line()
+```
+
+```{r}
+p1 + p2 + p3 + p4 + p5 + p6 + p7
+```
+
+# want to look at best seasons to go
+
+### I want the mean of the rec visits per month across the years
+
+### July is the most popular month, January is least popular
+```{r}
+parks_renamed %>%
+  select(park_name, month, year, rec_visits) %>%
+  filter(year > 2000) %>%
+  group_by(month, year) %>%
+  summarize(mean_rec_visits = mean(rec_visits)) %>%
+  ggplot(aes(x=month, y=mean_rec_visits, group=month, fill=month)) +
+  geom_boxplot()
 ```
 
 
