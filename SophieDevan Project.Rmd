@@ -26,24 +26,22 @@ glimpse(brush_raw)
 ```
 
 ```{r}
-brush_rename <- 
-  rename()
-```
-
-```{r}
-brush %>%
-  mutate(
-     "GPS Location" = "Latitude",
-               "X8" = "Longitude",
-  )
-```
-
-```{r}
-brush_rename %>%
+brush_raw %>%
   purrr::map_df(~ sum(is.na(.))) %>%
   tidyr::gather(variables, num_nas) %>% 
   arrange(desc(num_nas))
 ```
 
+# Trying to change the contents inside of columns
 
+```{r}
+#brush_raw %>%
+#  mutate_at(vars("old_browse"),funs(as.logical))
+#  to_logical(x, language = "en", custom_true = character(), custom_false = character())
+```
+
+# ```{r}
+# brush_rename <- 
+#   rename()
+# ```
 

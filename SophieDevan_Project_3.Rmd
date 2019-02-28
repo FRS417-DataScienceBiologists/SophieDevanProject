@@ -1,0 +1,69 @@
+---
+title: "SophieDevan_Project_3"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(skimr)
+```
+
+```{r}
+parks <- 
+  readr::read_csv("/Users/sophieborison/Desktop/National_Parks_Statistics.csv", skip=3, na=c("NA", "N/A", "#N/A"))
+```
+
+```{r}
+names(parks)
+```
+
+```{r}
+glimpse(parks)
+```
+
+```{r}
+parks_renamed <- parks %>%
+  dplyr::rename(
+            park_name = ParkName,
+            unit_code = UnitCode,                     
+            park_type = ParkType,
+               region = Region,                         
+                state = State,
+                year = Year,                           
+                month = Month,   
+            rec_visits = RecreationVisits,
+        non_rec_vists = NonRecreationVisits,
+            rec_hours = RecreationHours,
+         non_rec_hours = NonRecreationHours,
+          conc_lodging = ConcessionerLodging,            
+          conc_camping = ConcessionerCamping,
+          tent_campers = TentCampers,
+            rv_campers = RVCampers,
+            backcountry = Backcountry,               
+non_rec_overnight_stays = NonRecreationOvernightStays,
+  misc_overnight_stays = MiscellaneousOvernightStays,
+      park_name_total = ParkNameTotal,
+      unit_code_total = UnitCodeTotal,    
+      park_type_total = ParkTypeTotal,            
+        regional_total = RegionTotal,    
+          state_total = StateTotal,
+            year_total = YearTotal,
+      rec_visits_total = RecreationVisitsTotal,
+  non_rec_visits_total = NonRecreationVisitsTotal,
+      rec_hours_total = RecreationHoursTotal,
+  non_rec_hours_total = NonRecreationHoursTotal,   
+    conc_lodging_total = ConcessionerLodgingTotal,
+    conc_camping_total = ConcessionerCampingTotal,
+    tent_campers_total = TentCampersTotal,
+      rv_campers_total = RVCampersTotal,      
+      backgrounty_total = BackcountryTotal,                
+      non_rec_overnight = NonRecreationOvernightStaysTotal,
+misc_overnight_stays_total = MiscellaneousOvernightStaysTotal
+          )
+```
+
+

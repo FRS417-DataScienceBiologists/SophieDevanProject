@@ -1,0 +1,70 @@
+---
+title: "SophieDevan Project 2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(skimr)
+```
+
+```{r}
+olympics <- 
+  readr::read_csv("/Users/sophieborison/Desktop/athlete_events_2.csv", na=c("NA", "N/A", "#N/A"))
+```
+
+```{r}
+names(olympics)
+```
+
+```{r}
+glimpse(olympics)
+```
+
+```{r}
+olympics_renamed <- olympics %>%
+  dplyr::rename(
+          id = ID,
+          name = Name,
+          sex = Sex,
+          age = Age,
+          height = Height,
+          weight = Weight,
+          team = Team,
+          country = NOC,
+          games = Games,
+          year = Year,
+          season = Season,
+          city = City,
+          sport = Sport,
+          event = Event,
+          medal = Medal
+          )
+```
+
+# Medals Per Country
+### `I want to consolidate medals per country, all types of medals`
+
+```{r}
+olympics_renamed %>%
+  filter(medal=="Gold" | medal=="Silver" | medal=="Bronze") %>% 
+  group_by(country) %>%
+  count(medal) %>% 
+  ggplot(aes(x=country))+
+  geom_bar(position="dodge")
+```
+
+# want to mutate and add new column or just create new object medals per country
+# want to delete games colmn
+
+# want to create graph of weight to wins
+
+```{r}
+ggplot(data=olympics_renamed, mapping=aes(x=medal, y=weight, group=country)) +
+  geom_point(aes(color=country, size=height)) +
+  scale_y_log10()
+```
