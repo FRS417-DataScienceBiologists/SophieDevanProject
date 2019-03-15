@@ -1,11 +1,7 @@
 ---
-title: "SophieDevan_Project_3"
-output: html_document
+title: "National Park Visits"
+output: ioslides_presentation
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 # load libraries
 ```{r}
