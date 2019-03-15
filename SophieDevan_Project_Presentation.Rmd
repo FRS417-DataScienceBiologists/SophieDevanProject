@@ -261,9 +261,9 @@ parks_renamed %>%
   ggplot(aes(x=year, y=mean_rec_visits)) +
   geom_point() +
   geom_line() +
-  labs(title = "Mean Rec Visits Overtime",
+  labs(title = "Rec Visits Overtime",
        x = "Year",
-       y = "Mean Rec Visits") +
+       y = "Rec Visits") +
   theme(axis.text.x = element_text(hjust = 1),
        plot.title=element_text(size=16, face="bold", hjust=0.5),
         axis.text = element_text(size=10),
@@ -283,9 +283,9 @@ parks_renamed %>%
   ggplot(aes(x=year, y=mean_rec_visits)) +
   geom_point() +
   geom_line() +
-  labs(title = "Mean Rec Visits to Great Smoky Mountains Overtime",
+  labs(title = "Rec Visits to Great Smoky Mountains Overtime",
        x = "Year",
-       y = "Mean Rec Visits") +
+       y = "Rec Visits") +
   theme(plot.title=element_text(size=16, face="bold", hjust=0.5),
         axis.text = element_text(size=10),
         axis.title = element_text(size=12)) +
@@ -304,9 +304,9 @@ parks_renamed %>%
   ggplot(aes(x=year, y=mean_rec_visits)) +
   geom_point() +
   geom_line() +
-  labs(title = "Mean Rec Visits to Grand Canyon NP Overtime",
+  labs(title = "Rec Visits to Grand Canyon NP Overtime",
        x = "Year",
-       y = "Mean Rec Visits") +
+       y = "Rec Visits") +
   theme(plot.title=element_text(size=16, face="bold", hjust=0.5),
         axis.text = element_text(size=10),
         axis.title = element_text(size=12)) +
@@ -325,9 +325,9 @@ parks_renamed %>%
   ggplot(aes(x=year, y=mean_rec_visits)) +
   geom_point() +
   geom_line() +
-  labs(title = "Mean Rec Visits to Yosemite NP Overtime",
+  labs(title = "Rec Visits to Yosemite NP Overtime",
        x = "Year",
-       y = "Mean Rec Visits") +
+       y = "Rec Visits") +
   theme(plot.title=element_text(size=16, face="bold", hjust=0.5),
         axis.text = element_text(size=10),
         axis.title = element_text(size=12)) +
@@ -346,9 +346,9 @@ parks_renamed %>%
   ggplot(aes(x=year, y=mean_rec_visits)) +
   geom_point() +
   geom_line() +
-  labs(title = "Mean Rec Visits to Yellowstone NP Overtime",
+  labs(title = "Rec Visits to Yellowstone NP Overtime",
        x = "Year",
-       y = "Mean Rec Visits") +
+       y = "Rec Visits") +
   theme(plot.title=element_text(size=16, face="bold", hjust=0.5),
         axis.text = element_text(size=10),
         axis.title = element_text(size=12)) +
@@ -367,9 +367,9 @@ parks_renamed %>%
   ggplot(aes(x=year, y=mean_rec_visits)) +
   geom_point() +
   geom_line() +
-  labs(title = "Mean Rec Visits to Olympic NP Overtime",
+  labs(title = "Rec Visits to Olympic NP Overtime",
        x = "Year",
-       y = "Mean Rec Visits") +
+       y = "Rec Visits") +
   theme(plot.title=element_text(size=16, face="bold", hjust=0.5),
         axis.text = element_text(size=10),
         axis.title = element_text(size=12)) +
@@ -387,9 +387,9 @@ parks_renamed %>%
   summarize(mean_rec_visits = mean(rec_visits)) %>%
   ggplot(aes(x=year, y=mean_rec_visits, group=park_name, color=park_name)) +
   geom_line() +
-    labs(title = "Mean Rec Visits in Top 5 Parks Overtime",
+    labs(title = "Rec Visits in Top 5 Parks Overtime",
        x = "Year",
-       y = "Mean Rec Visits") +
+       y = "Rec Visits") +
   theme(axis.text.x = element_text(hjust = 1),
        plot.title=element_text(size=16, face="bold", hjust=0.5),
         axis.text = element_text(size=10),
@@ -409,9 +409,9 @@ parks_renamed %>%
   ggplot(aes(x=year, y=mean_rec_visits)) +
   geom_point() +
   geom_line() +
-  labs(title = "Mean Rec Visits to Kobuk Valley NP Overtime",
+  labs(title = "Rec Visits to Kobuk Valley NP Overtime",
        x = "Year",
-       y = "Mean Rec Visits") +
+       y = "Rec Visits") +
   theme(plot.title=element_text(size=16, face="bold", hjust=0.5),
         axis.text = element_text(size=10),
         axis.title = element_text(size=12)) +
@@ -430,9 +430,9 @@ parks_renamed %>%
   ggplot(aes(x=year, y=mean_rec_visits)) +
   geom_point() +
   geom_line() +
-  labs(title = "Mean Rec Visits to Gates of the Arctic Overtime",
+  labs(title = "Rec Visits to Gates of the Arctic Overtime",
        x = "Year",
-       y = "Mean Rec Visits") +
+       y = "Rec Visits") +
   theme(plot.title=element_text(size=16, face="bold", hjust=0.5),
         axis.text = element_text(size=10),
         axis.title = element_text(size=12)) +
@@ -451,9 +451,9 @@ parks_renamed %>%
   ggplot(aes(x=year, y=mean_rec_visits)) +
   geom_point() +
   geom_line() +
-  labs(title = "Mean Rec Visits to Lake Clark NP Overtime",
+  labs(title = "Rec Visits to Lake Clark NP Overtime",
        x = "Year",
-       y = "Mean Rec Visits") +
+       y = "Rec Visits") +
   theme(plot.title=element_text(size=16, face="bold", hjust=0.5),
         axis.text = element_text(size=10),
         axis.title = element_text(size=12)) +
@@ -472,9 +472,9 @@ parks_renamed %>%
   ggplot(aes(x=year, y=mean_rec_visits)) +
   geom_point() +
   geom_line() +
-  labs(title = "Mean Rec Visits to Isle Royale NP Overtime",
+  labs(title = "Rec Visits to Isle Royale NP Overtime",
        x = "Year",
-       y = "Mean Rec Visits") +
+       y = "Rec Visits") +
   theme(plot.title=element_text(size=16, face="bold", hjust=0.5),
         axis.text = element_text(size=10),
         axis.title = element_text(size=12)) +
@@ -493,9 +493,9 @@ parks_renamed %>%
   ggplot(aes(x=year, y=mean_rec_visits)) +
   geom_point() +
   geom_line() +
-  labs(title = "Mean Rec Visits to Katmai NP Overtime",
+  labs(title = "Rec Visits to Katmai NP Overtime",
        x = "Year",
-       y = "Mean Rec Visits") +
+       y = "Rec Visits") +
   theme(plot.title=element_text(size=16, face="bold", hjust=0.5),
         axis.text = element_text(size=10),
         axis.title = element_text(size=12)) +
@@ -513,9 +513,9 @@ parks_renamed %>%
   summarize(mean_rec_visits = mean(rec_visits)) %>%
   ggplot(aes(x=year, y=mean_rec_visits, group=park_name, color=park_name)) +
   geom_line() +
-    labs(title = "Mean Rec Visits in Bottom 5 Parks Overtime",
+    labs(title = "Rec Visits in Bottom 5 Parks Overtime",
        x = "Year",
-       y = "Mean Rec Visits") +
+       y = "Rec Visits") +
   theme(axis.text.x = element_text(hjust = 1),
        plot.title=element_text(size=16, face="bold", hjust=0.5),
         axis.text = element_text(size=10),
