@@ -301,11 +301,10 @@ parks_renamed %>%
 # Our question: How did the recessions of 1981 and 2008 affect rec visits in the 5 most popular National Parks?
 
 ## How did visits fare across the parks?
-
+- visits have been going up over time
 ![](SophieDevan_Project_Presentation_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
 
 ## How did visits fare across the parks?
-- visits have been going up going up over time
 - peaked in late 80s then again in 2016 and onwards
 ![](SophieDevan_Project_Presentation_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
 

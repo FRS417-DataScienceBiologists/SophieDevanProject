@@ -227,7 +227,7 @@ parks_renamed %>%
 # Our question: How did the recessions of 1981 and 2008 affect rec visits in the 5 most popular National Parks?
 
 ## How did visits fare across the parks?
-
+- visits have been going up over time
 ```{r echo=FALSE}
 parks_renamed %>%
   group_by(year) %>%
@@ -249,7 +249,6 @@ parks_renamed %>%
 ```
 
 ## How did visits fare across the parks?
-- visits have been going up going up over time
 - peaked in late 80s then again in 2016 and onwards
 ```{r echo=FALSE}
 parks_renamed %>%
