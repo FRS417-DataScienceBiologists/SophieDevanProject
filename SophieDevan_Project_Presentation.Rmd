@@ -3,20 +3,22 @@ title: "National Park Visits"
 output: ioslides_presentation
 ---
 
-# load libraries
+# Getting Started
+
+## Load libraries
 ```{r}
 library(tidyverse)
 library(skimr)
 library(paletteer)
 ```
 
-# get dataframe of palettes
+## Get dataframe of palettes
 ```{r}
 colors<-
   paletteer::palettes_d_names
 ```
 
-# set palette
+## Set palette
 ```{r}
 my_palette <-
   paletteer_d(package="ggsci", palette="category20_d3")
@@ -24,23 +26,23 @@ my_palette2 <-
   paletteer_d(package="ggsci", palette="category20_d3", 1)
 ```
 
-# read csv
+## Read csv
 ```{r}
 parks <- 
   readr::read_csv("National_Parks_Statistics.csv", skip=3, na=c("NA", "N/A", "#N/A"))
 ```
 
-# get variable names
+## Get variable names
 ```{r}
 names(parks)
 ```
 
-# summarize data
+## Summarize data
 ```{r}
 glimpse(parks)
 ```
 
-# map na's
+## Map na's
 ```{r}
 parks %>%
   purrr::map_df(~ sum(is.na(.))) %>%
@@ -48,7 +50,7 @@ parks %>%
   arrange(desc(num_nas))
 ```
 
-# rename variables
+## Rename variables
 ```{r}
 parks_renamed <- parks %>%
   dplyr::rename(
@@ -90,23 +92,17 @@ misc_overnight_stays_total = MiscellaneousOvernightStaysTotal
           )
 ```
 
-# want to summarize number of rec visits per park per year
-
-### I dont want total number of entries, but total of rows for that park
-```{r}
-parks_renamed %>%
-  group_by(park_name) %>%
-  summarize(total = n())
-```
-
-# Get rid of scientific notation
+## Get rid of scientific notation
 ```{r}
 options(scipen=999)
 ```
 
-### GGNRA in 1987 had the highest average number of visits 
-### NRAs seem to be the most popular park type, at least recreationally
-```{r}
+# Preliminary Analysis
+
+## What is the most popular park type? 
+- GGNRA in 1987 had the highest average number of visits 
+- NRAs seem to be the most popular park type, at least recreationally
+```{r echo=FALSE}
 parks_renamed %>%
   group_by(park_type) %>%
    summarize(mean_rec_visits = mean(rec_visits), 
@@ -126,10 +122,10 @@ parks_renamed %>%
   scale_fill_manual(values=my_palette)
 ```
 
-# avergae rec visits per park
-# Kobuk Valley is least popular
-# Great Smoky Mountains is most popular
-```{r}
+## What is the most popular park?
+- Kobuk Valley is least popular
+- Great Smoky Mountains is most popular
+```{r echo=FALSE}
 parks_renamed %>%
   filter(park_type=="National Park") %>%
   group_by(park_name) %>%
@@ -153,9 +149,10 @@ parks_renamed %>%
 graphaxis <- c(1,2,3,4,5,6,7,8,9,10,11,12)
 ```
 
-# want to look at best seasons to go
-### July is the most popular month, January is least popular
-```{r}
+## What is the best season to go?
+- July is the most popular month
+- January is least popular
+```{r echo=FALSE}
 parks_renamed %>%
   select(park_name, month, year, rec_visits) %>%
   filter(year > 2000) %>%
@@ -175,8 +172,7 @@ parks_renamed %>%
   scale_x_continuous(breaks=graphaxis)
 ```
 
-
-# want to look at what region is most popular
+## What region is the most popular?
 ```{r}
 parks_renamed %>%
   group_by(region) %>%
@@ -187,7 +183,8 @@ parks_renamed %>%
   arrange(desc(mean_rec_visits))
 ```
 
-```{r}
+## What region is the most popular?
+```{r echo=FALSE}
 parks_renamed %>%
   select(region, year, rec_visits) %>%
   filter(region != "National Capital") %>%
@@ -206,7 +203,8 @@ parks_renamed %>%
   scale_colour_manual(values=my_palette)
 ```
 
-```{r}
+## How do regions compare?
+```{r echo=FALSE}
 parks_renamed %>%
   select(region, year, rec_visits) %>%
   group_by(year, region) %>%
@@ -224,10 +222,12 @@ parks_renamed %>%
   scale_colour_manual(values=my_palette)
 ```
 
-### average rec visits per year
-### rec visits have been slowly going up going up over time
-### peaked in late 80s then again in 2010 and onwards
-```{r}
+# Our question: How did the recessions of 1981 and 2008 affect rec visits in the 5 most popular National Parks?
+
+## How did visits fare across the parks?
+- visits have been slowly going up going up over time
+- peaked in late 80s then again in 2010 and onwards
+```{r echo=FALSE}
 parks_renamed %>%
   group_by(year) %>%
    summarize(mean_rec_visits = mean(rec_visits), 
@@ -250,8 +250,8 @@ parks_renamed %>%
   theme(legend.position = "none")
 ```
 
-# want to look at visits of top 5 parks over time
-```{r}
+## How did visits fare in the Great Smoky Mountains?
+```{r echo=FALSE}
 parks_renamed %>%
   select(park_name, year, rec_visits) %>%
   filter(park_name=="Great Smoky Mountains NP") %>%
@@ -271,7 +271,8 @@ parks_renamed %>%
   theme(legend.position = "none")
 ```
 
-```{r}
+## How did visits fare in the Grand Canyon?
+```{r echo=FALSE}
 parks_renamed %>%
   select(park_name, year, rec_visits) %>%
   filter(park_name=="Grand Canyon NP") %>%
@@ -291,7 +292,8 @@ parks_renamed %>%
   theme(legend.position = "none")
 ```
 
-```{r}
+## How did visits fare in Yosemite?
+```{r echo=FALSE}
 parks_renamed %>%
   select(park_name, year, rec_visits) %>%
   filter(park_name=="Yosemite NP") %>%
@@ -311,7 +313,8 @@ parks_renamed %>%
   theme(legend.position = "none")
 ```
 
-```{r}
+## How did visits fare in Yellowstone?
+```{r echo=FALSE}
 parks_renamed %>%
   select(park_name, year, rec_visits) %>%
   filter(park_name=="Yellowstone NP") %>%
@@ -331,7 +334,8 @@ parks_renamed %>%
   theme(legend.position = "none")
 ```
 
-```{r}
+## How did visits fare in Olympic?
+```{r echo=FALSE}
 parks_renamed %>%
   select(park_name, year, rec_visits) %>%
   filter(park_name=="Olympic NP") %>%
@@ -351,7 +355,8 @@ parks_renamed %>%
   theme(legend.position = "none")
 ```
 
-```{r}
+## How did visits fare in the least popular park, Kobuk Valley?
+```{r echo=FALSE}
 parks_renamed %>%
   select(park_name, year, rec_visits) %>%
   filter(park_name=="Kobuk Valley NP") %>%
