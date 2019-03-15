@@ -226,8 +226,30 @@ parks_renamed %>%
 
 ## How did visits fare across the parks?
 - visits have been going up going up over time
+- peaked in late 80s then again in 2016 and onwards
+```{r echo=FALSE}
+parks_renamed %>%
+  group_by(year) %>%
+   summarize(sum_rec_visits = sum(rec_visits)) %>%
+  arrange(desc(sum_rec_visits)) %>%
+  ggplot(aes(x=year, y=sum_rec_visits)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Rec Visits Overtime",
+       x = "Year",
+       y = "Rec Visits") +
+  theme(axis.text.x = element_text(hjust = 1),
+       plot.title=element_text(size=16, face="bold", hjust=0.5),
+        axis.text = element_text(size=10),
+        axis.title = element_text(size=12)) +
+  geom_vline(aes(xintercept=2008, colour="red")) +
+  geom_vline(aes(xintercept=1981, colour="red")) +
+  theme(legend.position = "none")
+```
+
+## How did visits fare across the parks?
+- visits have been going up going up over time
 - peaked in late 80s then again in 2006 and onwards
-- could suggest most popular parks become more popular, and least becoming less popular
 ```{r echo=FALSE}
 parks_renamed %>%
   group_by(year) %>%
